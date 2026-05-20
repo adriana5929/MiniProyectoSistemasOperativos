@@ -112,7 +112,9 @@ docker compose up -d
 
 ## contenedores activos
 
-<img width="554" height="164" alt="image" src="https://github.com/user-attachments/assets/10baa774-9feb-4ebb-941c-c7c427a2d26f" />
+<img width="297" height="57" alt="image" src="https://github.com/user-attachments/assets/4b9405f2-f6d7-4097-b743-3ba27223d8c7" />
+
+<img width="497" height="67" alt="image" src="https://github.com/user-attachments/assets/eebccb32-8da8-4205-86a4-e51d429b676c" />
 
 
 ---
