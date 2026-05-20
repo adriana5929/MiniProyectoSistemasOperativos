@@ -1,18 +1,20 @@
 # Docker Lab con WSL2 y Ubuntu
 
-## Descripción
+## Este proyecto implementa un entorno de desarrollo basado en contenedores Docker utilizando WSL2 y Ubuntu sobre Windows.
 
-Este proyecto implementa un entorno Docker utilizando WSL2 y Ubuntu en Windows.
 
-El entorno incluye:
+## Tecnologías Utilizadas
 
+- WSL2
+- Ubuntu
+- Docker
 - Nginx
 - Node.js
 - PostgreSQL
 - pgAdmin 4
 - Jupyter Lab
+- Git & GitHub
 
-Todo el sistema fue orquestado usando Docker Compose.
 
 ---
 
@@ -34,20 +36,6 @@ Windows
 
 ---
 
-# Tecnologías Utilizadas
-
-- Docker
-- Docker Compose
-- Ubuntu
-- WSL2
-- Node.js
-- Express
-- PostgreSQL
-- pgAdmin 4
-- Jupyter Lab
-- GitHub
-
----
 
 # Estructura del Proyecto
 
@@ -101,23 +89,15 @@ docker compose up -d
 
 # Evidencias
 
-## Docker funcionando
-
-<img width="932" height="488" alt="evidenciasdocker-ps png" src="https://github.com/user-attachments/assets/265853de-4769-4cee-8ce5-d5a987d1f478" />
-
 
 
 ## Nginx funcionando
 
-Captura del navegador:
-
-```text
-http://localhost:8080
-```
+<img width="932" height="488" alt="evidenciasdocker-ps png" src="https://github.com/user-attachments/assets/265853de-4769-4cee-8ce5-d5a987d1f478" />
 
 ## API Node.js
 
-<img width="1852" height="831" alt="evidenciasjupyter png" src="https://github.com/user-attachments/assets/ef4f5a28-511f-4270-beec-db47e5255e38" />
+<img width="1064" height="266" alt="evidenciasnode-api png (2)" src="https://github.com/user-attachments/assets/582cc3a8-fbc9-40e8-b29d-8464d8778728" />
 
 
 ## pgAdmin
@@ -125,12 +105,23 @@ http://localhost:8080
 <img width="1802" height="858" alt="evidenciaspgadmin png" src="https://github.com/user-attachments/assets/9672dc46-6976-46fa-90d2-9398603cc131" />
 
 
+
 ## Jupyter Lab
 
 <img width="1852" height="831" alt="evidenciasjupyter png" src="https://github.com/user-attachments/assets/f14fa524-349d-4469-ab53-084931062fe5" />
 
+## contenedores activos
+
+<img width="554" height="164" alt="image" src="https://github.com/user-attachments/assets/10baa774-9feb-4ebb-941c-c7c427a2d26f" />
+
+
 ---
+
 # Intregantes de grupo
 
-Adriana Milena Noscue Dagua
-Sebastian Cucalon Astorquiza
+
+| Nombre | Codigo |
+|---|---|
+|  Adriana Milena Noscue Dagua | 2477336 |
+| Sebastian Cucalon Astorquiza | 2477344 |
+
