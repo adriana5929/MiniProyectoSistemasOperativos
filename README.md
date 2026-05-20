@@ -103,11 +103,9 @@ docker compose up -d
 
 ## Docker funcionando
 
-Agregar captura de:
+Captura:<img width="932" height="488" alt="evidenciasdocker-ps png" src="https://github.com/user-attachments/assets/265853de-4769-4cee-8ce5-d5a987d1f478" />
 
-```bash
-docker ps
-```
+
 
 ## Nginx funcionando
 
@@ -119,7 +117,6 @@ http://localhost:8080
 
 ## API Node.js
 
-Captura:
 
 ```text
 http://localhost:3000
@@ -135,6 +132,7 @@ Captura del notebook funcionando.
 
 ---
 
-# Autor
+# Intregantes de grupo
 
-Adriana
+Adriana Milena Noscue Dagua
+Sebastian Cucalon Astorquiza
