@@ -117,13 +117,118 @@ docker compose up -d
 <img width="497" height="67" alt="image" src="https://github.com/user-attachments/assets/eebccb32-8da8-4205-86a4-e51d429b676c" />
 
 
+
 ---
+# Laboratorio 2
 
-# Intregantes de grupo
+# Gestión y Optimización de Procesos en Linux
+
+## Universidad del Valle - Sistemas Operativos
 
 
-| Nombre | Codigo |
-|---|---|
-|  Adriana Milena Noscue Dagua | 2477336 |
-| Sebastian Cucalon Astorquiza | 2477344 |
+## Objetivo
 
+Monitorear, administrar y optimizar procesos en Linux utilizando herramientas como htop, stress, kill, nice, renice y cpulimit.
+
+## Herramientas Utilizadas
+
+* Docker
+* Ubuntu
+* htop
+* stress
+* stress-ng
+* cpulimit
+* Python 3
+
+## Actividades Realizadas
+
+### 1. Reconocimiento del entorno
+
+Se analizaron los procesos del sistema mediante:
+
+```bash
+top
+htop
+ps aux
+pstree
+```
+
+Se identificaron PID, usuario, prioridad, uso de CPU y memoria.
+
+### 2. Generación de carga
+
+#### Saturación de CPU
+
+```bash
+stress --cpu 4 --timeout 60s
+```
+
+#### Saturación de Memoria
+
+```bash
+stress --vm 2 --vm-bytes 256M --timeout 60s
+```
+
+#### Competencia de procesos
+
+```bash
+stress --cpu 2 &
+python3 -c "while True: pass" &
+dd if=/dev/zero of=/dev/null bs=1M &
+```
+
+### 3. Optimización e intervención
+
+#### Finalización de procesos
+
+```bash
+kill PID
+kill -9 PID
+killall stress
+```
+
+#### Prioridades
+
+```bash
+nice -n 19 stress --cpu 2 &
+renice -n 15 -p PID
+```
+
+#### Limitación de CPU
+
+```bash
+cpulimit -p PID -l 30
+```
+
+## Script Utilizado
+
+Archivo:
+
+```text
+scripts/cpu_stress.py
+```
+
+Contenido:
+
+```python
+while True:
+    pass
+```
+
+## Evidencias
+
+Las capturas del laboratorio se encuentran en:
+
+```text
+evidencias/
+```
+
+## Conclusiones
+
+Las herramientas de administración de procesos permiten identificar cuellos de botella, controlar procesos problemáticos y optimizar el uso de recursos del sistema operativo Linux.
+
+>>>>>>> 86e3cc3 (Agregar laboratorio gestion y optimizacion de procesos Linux)
+## Integrantes del grupo
+|Nombre| Codigo|
+|Adriana Milena Noscue Dagua|2477336|
+Sebastian Cucalon Astorquiza|2477344|
