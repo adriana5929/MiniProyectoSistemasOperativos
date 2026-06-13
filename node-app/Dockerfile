@@ -1,13 +1,19 @@
-FROM node:20
+FROM node:20-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+RUN npm install -g pnpm
 
-RUN npm install
+COPY package.json pnpm-lock.yaml ./
+
+RUN pnpm install --frozen-lockfile
+
+RUN pnpm add dotenv @prisma/client-runtime-utils
 
 COPY . .
 
+RUN pnpm prisma generate
+
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+CMD ["pnpm", "dev"]

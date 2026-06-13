@@ -1,234 +1,367 @@
-# Docker Lab con WSL2 y Ubuntu
+# Servidor de Aplicaciones Bajo Estrés
 
-## Este proyecto implementa un entorno de desarrollo basado en contenedores Docker utilizando WSL2 y Ubuntu sobre Windows.
+Proyecto desarrollado para la asignatura de Sistemas Operativos 2026-1 de la Universidad del Valle - Sede Tuluá.
 
+## Descripción
+
+Esta aplicación implementa un entorno de estrés controlado sobre una arquitectura multicapa basada en Docker, compuesta por:
+
+- Next.js 14 (Servidor Web)
+- PostgreSQL 16 (Base de Datos)
+- PgAdmin (Administración de BD)
+- JupyterLab (Entrenamiento de IA)
+
+El objetivo es generar diferentes tipos de carga sobre el sistema para analizar el comportamiento de CPU, memoria RAM, I/O de disco y bloqueos en PostgreSQL utilizando herramientas de monitoreo del sistema operativo Linux.
+
+---
+
+## Arquitectura
+
+```text
+Usuario
+   │
+   ▼
+Next.js Dashboard
+   │
+   ├── HTTP Flood
+   ├── Query Flood
+   ├── Insert Flood
+   ├── Lock Contention
+   │
+   ▼
+PostgreSQL
+   │
+   ▼
+Métricas en Tiempo Real
+```
+
+---
 
 ## Tecnologías Utilizadas
 
-- WSL2
-- Ubuntu
+### Frontend
+
+- Next.js 14
+- TypeScript
+- React
+- Tailwind CSS
+
+### Backend
+
+- Next.js API Routes
+- Prisma ORM
+
+### Base de Datos
+
+- PostgreSQL 16
+
+### Infraestructura
+
 - Docker
-- Nginx
-- Node.js
-- PostgreSQL
-- pgAdmin 4
-- Jupyter Lab
-- Git & GitHub
+- Docker Compose
+- Ubuntu WSL2
 
+### Monitoreo
+
+- htop
+- vmstat
+- docker stats
+- pg_stat_activity
+- iostat
 
 ---
 
-# Arquitectura del Proyecto
+## Funcionalidades Implementadas
 
-```text
-Windows
-│
-├── WSL2
-│   └── Ubuntu
-│
-└── Docker Compose
-    ├── nginx
-    ├── node-app
-    ├── postgres
-    ├── pgadmin
-    └── jupyter
+### Dashboard de Control
+
+Panel web para iniciar y detener mecanismos de estrés.
+
+Muestra métricas en tiempo real:
+
+- Uso de CPU
+- Uso de RAM
+- Conexiones activas PostgreSQL
+- Lock Waits
+- Load Average
+- Uptime
+
+---
+
+## Mecanismos de Estrés
+
+### 1. HTTP Flood
+
+Objetivo:
+
+Saturar el servidor Next.js mediante múltiples peticiones HTTP concurrentes.
+
+Implementación:
+
+```typescript
+startHttpFlood(concurrency, duration)
+```
+
+Métricas observables:
+
+- CPU Node.js
+- Load Average
+- Docker Stats
+
+---
+
+### 2. Query Flood
+
+Objetivo:
+
+Generar consultas SQL complejas para aumentar el consumo de CPU de PostgreSQL.
+
+Implementación:
+
+```typescript
+startQueryFlood(workers, duration)
+```
+
+Métricas observables:
+
+- pg_stat_activity
+- CPU PostgreSQL
+- Conexiones activas
+
+---
+
+### 3. Insert Flood
+
+Objetivo:
+
+Estresar el sistema de escritura de PostgreSQL mediante inserciones masivas.
+
+Implementación:
+
+```typescript
+startInsertFlood(batchSize, duration)
+```
+
+Métricas observables:
+
+- WAL PostgreSQL
+- I/O de Disco
+- Docker Stats
+
+---
+
+### 4. Lock Contention
+
+Objetivo:
+
+Generar bloqueos entre transacciones concurrentes.
+
+Implementación:
+
+```typescript
+startLockContention()
+```
+
+Métricas observables:
+
+- pg_locks
+- lock waits
+- pg_stat_activity
+
+---
+
+## API REST
+
+### Métricas
+
+```http
+GET /api/metrics
+```
+
+Respuesta:
+
+```json
+{
+  "cpu": 24,
+  "ram": {
+    "total": 3779,
+    "used": 2737,
+    "free": 1042,
+    "percent": 72
+  },
+  "postgres": {
+    "active": 1,
+    "idle": 0,
+    "lockWaits": 0
+  },
+  "loadAvg": [10.43, 9.52, 7.19],
+  "uptime": 5800
+}
 ```
 
 ---
 
+### HTTP Flood
 
-# Estructura del Proyecto
+```http
+POST /api/stress/http
+```
 
-```text
-docker-lab/
-│
-├── nginx/
-├── node-app/
-├── postgres/
-├── jupyter/
-├── .env
-├── docker-compose.yml
-└── README.md
+Body:
+
+```json
+{
+  "action": "start",
+  "concurrency": 50,
+  "duration": 120
+}
+```
+
+Detener:
+
+```json
+{
+  "action": "stop"
+}
 ```
 
 ---
 
-# Instalación
+### Query Flood
 
-## Clonar repositorio
+```http
+POST /api/stress/query
+```
+
+---
+
+### Insert Flood
+
+```http
+POST /api/stress/insert
+```
+
+---
+
+### Lock Contention
+
+```http
+POST /api/stress/lock
+```
+
+---
+
+## Instalación
+
+### 1. Clonar repositorio
 
 ```bash
-git clone URL_DEL_REPOSITORIO
-```
-
-## Entrar al proyecto
-
-```bash
+git clone https://github.com/usuario/docker-lab.git
 cd docker-lab
 ```
 
-## Levantar contenedores
+### 2. Levantar contenedores
 
 ```bash
 docker compose up -d
 ```
 
-
-
-# Servicios
-
-| Servicio | Puerto |
-|---|---|
-| Nginx | 8080 |
-| Node.js | 3000 |
-| PostgreSQL | 5432 |
-| pgAdmin | 5050 |
-| Jupyter | 8888 |
-
----
-
-# Evidencias
-
-
-
-## Nginx funcionando
-
-<img width="932" height="488" alt="evidenciasdocker-ps png" src="https://github.com/user-attachments/assets/265853de-4769-4cee-8ce5-d5a987d1f478" />
-
-## API Node.js
-
-<img width="1064" height="266" alt="evidenciasnode-api png (2)" src="https://github.com/user-attachments/assets/582cc3a8-fbc9-40e8-b29d-8464d8778728" />
-
-
-## pgAdmin
-
-<img width="1802" height="858" alt="evidenciaspgadmin png" src="https://github.com/user-attachments/assets/9672dc46-6976-46fa-90d2-9398603cc131" />
-
-
-
-## Jupyter Lab
-
-<img width="1852" height="831" alt="evidenciasjupyter png" src="https://github.com/user-attachments/assets/f14fa524-349d-4469-ab53-084931062fe5" />
-
-## contenedores activos
-
-<img width="297" height="57" alt="image" src="https://github.com/user-attachments/assets/4b9405f2-f6d7-4097-b743-3ba27223d8c7" />
-
-<img width="497" height="67" alt="image" src="https://github.com/user-attachments/assets/eebccb32-8da8-4205-86a4-e51d429b676c" />
-
-
-
----
-# Laboratorio 2
-
-# Gestión y Optimización de Procesos en Linux
-
-## Universidad del Valle - Sistemas Operativos
-
-
-## Objetivo
-
-Monitorear, administrar y optimizar procesos en Linux utilizando herramientas como htop, stress, kill, nice, renice y cpulimit.
-
-## Herramientas Utilizadas
-
-* Docker
-* Ubuntu
-* htop
-* stress
-* stress-ng
-* cpulimit
-* Python 3
-
-## Actividades Realizadas
-
-### 1. Reconocimiento del entorno
-
-Se analizaron los procesos del sistema mediante:
+### 3. Verificar contenedores
 
 ```bash
-top
+docker ps
+```
+
+---
+
+## Acceso a Servicios
+
+### Aplicación Web
+
+```text
+http://localhost:3000
+```
+
+### PgAdmin
+
+```text
+http://localhost:5050
+```
+
+### JupyterLab
+
+```text
+http://localhost:8888
+```
+
+---
+
+## Monitoreo del Sistema
+
+### htop
+
+```bash
 htop
-ps aux
-pstree
 ```
 
-Se identificaron PID, usuario, prioridad, uso de CPU y memoria.
-
-### 2. Generación de carga
-
-#### Saturación de CPU
+### Docker Stats
 
 ```bash
-stress --cpu 4 --timeout 60s
+docker stats
 ```
 
-#### Saturación de Memoria
+### VMStat
 
 ```bash
-stress --vm 2 --vm-bytes 256M --timeout 60s
+vmstat 2 60
 ```
 
-#### Competencia de procesos
+### PostgreSQL
 
-```bash
-stress --cpu 2 &
-python3 -c "while True: pass" &
-dd if=/dev/zero of=/dev/null bs=1M &
+```sql
+SELECT state, count(*)
+FROM pg_stat_activity
+GROUP BY state;
 ```
 
-### 3. Optimización e intervención
+---
 
-#### Finalización de procesos
+## Evidencias Esperadas
 
-```bash
-kill PID
-kill -9 PID
-killall stress
-```
+Durante las pruebas se deben capturar:
 
-#### Prioridades
+- Estado Idle
+- HTTP Flood
+- Query Flood
+- Insert Flood
+- Lock Contention
+- Ejecución simultánea con IA
+- Estado de recuperación
 
-```bash
-nice -n 19 stress --cpu 2 &
-renice -n 15 -p PID
-```
+---
 
-#### Limitación de CPU
+## Resultados Esperados
 
-```bash
-cpulimit -p PID -l 30
-```
+Durante la ejecución de los mecanismos de estrés se espera observar:
 
-## Script Utilizado
+- Incremento de CPU en Node.js
+- Incremento de CPU en PostgreSQL
+- Aumento de conexiones activas
+- Incremento de I/O de disco
+- Aparición de lock waits
+- Aumento del Load Average
+- Competencia de recursos con el entrenamiento del modelo IA
 
-Archivo:
+---
 
-```text
-scripts/cpu_stress.py
-```
+## Autores
 
-Contenido:
+Adriana Milena Noscue Dagua
 
-```python
-while True:
-    pass
-```
+Universidad del Valle – Sede Tuluá
 
-## Evidencias
+Ingeniería de Sistemas
 
-Las capturas del laboratorio se encuentran en:
+Curso: Sistemas Operativos 2026-1
 
-```text
-evidencias/
-```
-
-## Conclusiones
-
-Las herramientas de administración de procesos permiten identificar cuellos de botella, controlar procesos problemáticos y optimizar el uso de recursos del sistema operativo Linux.
-
->>>>>>> 86e3cc3 (Agregar laboratorio gestion y optimizacion de procesos Linux)
-## Integrantes del grupo
-|Nombre| Codigo|
-|Adriana Milena Noscue Dagua|2477336|
-Sebastian Cucalon Astorquiza|2477344|
+Mini Proyecto: Servidor de Aplicaciones Bajo Estrés

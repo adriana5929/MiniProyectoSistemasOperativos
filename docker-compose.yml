@@ -1,13 +1,5 @@
 services:
 
-  nginx:
-    build: ./nginx
-    container_name: nginx-server
-    ports:
-      - "8080:80"
-    networks:
-      - dockerlab
-
   node-app:
     build: ./node-app
     container_name: node-api
@@ -19,6 +11,7 @@ services:
       - postgres
     networks:
       - dockerlab
+    restart: unless-stopped
 
   postgres:
     image: postgres:16
@@ -48,7 +41,7 @@ services:
       - dockerlab
 
   jupyter:
-    image: jupyter/base-notebook
+    image: quay.io/jupyter/base-notebook
     container_name: jupyter-lab
     environment:
       JUPYTER_TOKEN: ${JUPYTER_TOKEN}
