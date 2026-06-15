@@ -331,37 +331,48 @@ GROUP BY state;
 Durante las pruebas se deben capturar:
 
 - Estado Idle
+  
   <img width="921" height="458" alt="image" src="https://github.com/user-attachments/assets/e6a6596f-3688-4459-b617-6cc37f7108ba" />
 
 
 - HTTP Flood
+  
   <img width="670" height="287" alt="image" src="https://github.com/user-attachments/assets/4586a498-5687-42c4-bab9-715f06edbb63" />
 
 - Query Flood
+  
   <img width="921" height="728" alt="image" src="https://github.com/user-attachments/assets/b3fe4eba-3bc1-47c6-86d8-2c5274e8944e" />
 
 - Htoop Query Flood
+  
   <img width="921" height="443" alt="image" src="https://github.com/user-attachments/assets/86319a3e-527c-4a59-aca5-6ff5907cbfc5" />
 
 
 - Insert Flood
+  
   <img width="921" height="726" alt="image" src="https://github.com/user-attachments/assets/05f7be71-4898-4acc-9967-3fce73c11d26" />
   
 - htoop Insert Flood
+  
   <img width="921" height="392" alt="image" src="https://github.com/user-attachments/assets/a894093c-8d87-41bb-b768-e6bb09627042" />
 
 - Lock Contention
+  
   <img width="921" height="623" alt="image" src="https://github.com/user-attachments/assets/70de118e-c6d8-4cd9-aa8a-90cec11c418f" />
 
 - Ejecución simultánea con IA
-  <img width="921" height="651" alt="image" src="https://github.com/user-attachments/assets/9ea7aee8-86bb-45bb-8552-d2ce40544fc9" />
+
+  <img width="612" height="269" alt="image" src="https://github.com/user-attachments/assets/1466a038-0c43-46c4-9b49-58e5b6016b38" />
+
+
   
 - Htoop en ejecucion en simultanea
-  <img width="612" height="269" alt="image" src="https://github.com/user-attachments/assets/ab8d2eda-c952-47c9-af26-7a7c666992e3" />
 
+  <img width="921" height="404" alt="image" src="https://github.com/user-attachments/assets/e5011ffb-789a-45f0-b580-9e7093b342db" />
 
 
 - Estado de recuperación
+
   <img width="921" height="417" alt="image" src="https://github.com/user-attachments/assets/d35cc980-2e97-42a6-a883-3b24964a57b2" />
 
 
