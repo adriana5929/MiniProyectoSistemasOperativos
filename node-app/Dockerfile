@@ -16,4 +16,6 @@ RUN pnpm prisma generate
 
 EXPOSE 3000
 
+ENV NEXT_DISABLE_TURBOPACK=1
+
 CMD ["pnpm", "dev"]
