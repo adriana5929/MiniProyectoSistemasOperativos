@@ -357,7 +357,8 @@ Durante las pruebas se deben capturar:
   <img width="921" height="651" alt="image" src="https://github.com/user-attachments/assets/9ea7aee8-86bb-45bb-8552-d2ce40544fc9" />
   
 - Htoop en ejecucion en simultanea
-  <img width="921" height="404" alt="image" src="https://github.com/user-attachments/assets/471bf20c-02c5-49d4-ae24-a73ad302036f" />
+  <img width="612" height="269" alt="image" src="https://github.com/user-attachments/assets/ab8d2eda-c952-47c9-af26-7a7c666992e3" />
+
 
 
 - Estado de recuperación
